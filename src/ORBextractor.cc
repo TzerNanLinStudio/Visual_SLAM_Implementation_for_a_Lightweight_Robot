@@ -62,6 +62,9 @@
 
 #include "ORBextractor.h"
 
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 using namespace cv;
 using namespace std;

@@ -30,6 +30,10 @@
 
 #include "Thirdparty/DBoW2/DUtils/Random.h"
 
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 namespace ORB_SLAM2
 {
 

@@ -24,6 +24,11 @@ set(SRCS_DUTILS
   DUtils/Random.cpp
   DUtils/Timestamp.cpp)
 
+#set(OpenCV_DIR "/usr/lib/aarch64-linux-gnu/cmake/opencv4")
+#find_package(OpenCV REQUIRED)
+#if(NOT OpenCV_FOUND)
+#   message(FATAL_ERROR "OpenCV > 777 not found.")
+#endif()
 find_package(OpenCV 3.0 QUIET)
 if(NOT OpenCV_FOUND)
    find_package(OpenCV 2.4.3 QUIET)

@@ -28,6 +28,11 @@ endif()
 
 LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 
+set(OpenCV_DIR "/usr/lib/aarch64-linux-gnu/cmake/opencv4")
+find_package(OpenCV REQUIRED)
+#if(NOT OpenCV_FOUND)
+#   message(FATAL_ERROR "OpenCV > 666 not found.")
+#endif()
 find_package(OpenCV 3.0 QUIET)
 if(NOT OpenCV_FOUND)
    find_package(OpenCV 2.4.3 QUIET)
@@ -36,7 +41,8 @@ if(NOT OpenCV_FOUND)
    endif()
 endif()
 
-find_package(Eigen3 3.1.0 REQUIRED)
+find_package(Eigen3 3.1.0 REQUIRED NO_MODULE)
+#find_package(Eigen3 3.1.0 REQUIRED)
 find_package(Pangolin REQUIRED)
 
 include_directories(
@@ -110,4 +116,24 @@ target_link_libraries(mono_kitti ${PROJECT_NAME})
 add_executable(mono_euroc
 Examples/Monocular/mono_euroc.cc)
 target_link_libraries(mono_euroc ${PROJECT_NAME})
+
+add_executable(mono_tum_copy
+Examples/Monocular/mono_tum_copy.cc)
+target_link_libraries(mono_tum_copy ${PROJECT_NAME})
+
+add_executable(A_Test_01
+Examples/Monocular/A_Test_01.cc)
+target_link_libraries(A_Test_01 ${PROJECT_NAME})
+
+add_executable(A_Test_02
+Examples/Monocular/A_Test_02.cc)
+target_link_libraries(A_Test_02 ${PROJECT_NAME})
+
+add_executable(A_Test_03
+Examples/Monocular/A_Test_03.cc)
+target_link_libraries(A_Test_03 ${PROJECT_NAME})
+
+add_executable(A_Test_04
+Examples/Monocular/A_Test_04.cc)
+target_link_libraries(A_Test_04 ${PROJECT_NAME})
 
