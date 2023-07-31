@@ -137,3 +137,12 @@ add_executable(A_Test_04
 Examples/Monocular/A_Test_04.cc)
 target_link_libraries(A_Test_04 ${PROJECT_NAME})
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Monocular/A1_Test_01)
+add_executable(mono
+Examples/Monocular/A1_Test_01/mono.cc)
+target_link_libraries(mono ${PROJECT_NAME})
+
+add_executable(testcode
+Examples/Monocular/A1_Test_01/testcode.cc)
+target_link_libraries(testcode ${PROJECT_NAME})
+

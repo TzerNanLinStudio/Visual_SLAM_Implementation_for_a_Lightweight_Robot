@@ -18,7 +18,23 @@
 using namespace cv;
 using namespace std;
 
+#include <thread>
+#include <atomic>
+
+std::atomic<bool> keepRunning(true);
+
 void WaitForInput();
+
+void getUserInput() {
+    char x;
+    while (true) {
+        std::cin >> x;
+        if (x == 'x') {
+            keepRunning = false;
+            break;
+        }
+    }
+}
 
 int main(int argc, char* argv[]) {
     std::cout << "=====Start==============================" << std::endl;
@@ -43,20 +59,21 @@ int main(int argc, char* argv[]) {
     std::cout << "=====Start Load Images==============================" << std::endl;
     WaitForInput();
 
-	VideoCapture cap("nvarguscamerasrc ! video/x-raw(memory:NVMM), width=3280, height=2464, format=(string)NV12, framerate=(fraction)20/1 ! nvvidconv flip-method=0 ! video/x-raw, width=(int)1280, height=(int)720, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink");
+	//VideoCapture cap("nvarguscamerasrc ! video/x-raw(memory:NVMM), width=3280, height=2464, format=(string)NV12, framerate=(fraction)20/1 ! nvvidconv flip-method=0 ! video/x-raw, width=(int)1280, height=(int)720, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink");
+    cv::VideoCapture cap("nvarguscamerasrc sensor_mode=4 ! video/x-raw(memory:NVMM), width=1280, height=720, format=(string)NV12, framerate=(fraction)60/1 ! nvvidconv flip-method=0 ! video/x-raw, width=(int)1280, height=(int)720, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink");
+    
 
+    std::thread inputThread(getUserInput);    
 
-    while(img_counter < num_images)
+    std::cout << std::fixed << std::setprecision(6); 
+
+    //while(img_counter < num_images)
+    while(1)
     {
 	Mat img;
         cap >> img;
 
-        // Check if the image was successfully read
-        if(img.empty())
-        {
-            std::cerr << "ERROR: Unable to read the image\n";
-            return 1;
-        }
+
 
 	// Get the current time
 	auto now = std::chrono::system_clock::now();
@@ -69,10 +86,20 @@ int main(int argc, char* argv[]) {
 
 	// Convert to a double
 	double tframe = seconds.count();
+	std::cout << "tframe: " << tframe << std::endl;
+
+        // Check if the image was successfully read
+        if(img.empty())
+        {
+            std::cerr << "ERROR: Unable to read the image\n";
+            return 1;
+        }
 
 	SLAM.TrackMonocular(img,tframe);
 
         sleep(1);
+
+	if (!keepRunning) break;
 
         img_counter++;  
     }
@@ -80,6 +107,10 @@ int main(int argc, char* argv[]) {
 
     SLAM.Shutdown();
     std::cout << "=====End SLAM==============================" << std::endl;
+
+    // When everything done, release the video capture object
+    cap.release();
+
 
     // Closes all the frames
     destroyAllWindows();

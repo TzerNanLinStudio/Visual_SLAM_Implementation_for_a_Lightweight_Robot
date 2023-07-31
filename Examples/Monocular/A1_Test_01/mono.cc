@@ -83,15 +83,27 @@ int main(int argc, char **argv)
 
 #ifdef COMPILEDWITHC11
         std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
-	//cout << "steady_clock" << tframe << endl; // I tried and it seems to be this one.
 #else
         std::chrono::monotonic_clock::time_point t1 = std::chrono::monotonic_clock::now();
-	//cout << "tmonotonic_clock" << tframe << endl;
 #endif
 
         // Pass the image to the SLAM system
         SLAM.TrackMonocular(im,tframe);
-	cout << "tframe: " << tframe << endl;
+
+        // Get the current time
+        auto now = std::chrono::system_clock::now();
+
+        // Convert it to a time_point for the Epoch (1970-01-01 00:00:00)
+        auto epoch = now.time_since_epoch();
+
+        // Convert that to seconds as a double
+        std::chrono::duration<double> seconds = std::chrono::duration_cast<std::chrono::duration<double>>(epoch);
+
+	// Convert to a double
+	double tframe2 = seconds.count();
+
+	cout << "tframe: " << tframe << " ; tframe2: " << tframe2 << endl;
+
 
 #ifdef COMPILEDWITHC11
         std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
@@ -116,7 +128,7 @@ int main(int argc, char **argv)
 
     // Stop all threads
     SLAM.Shutdown();
-/*
+
     // Tracking time statistics
     sort(vTimesTrack.begin(),vTimesTrack.end());
     float totaltime = 0;
@@ -130,7 +142,7 @@ int main(int argc, char **argv)
 
     // Save camera trajectory
     SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory.txt");
-*/
+
     return 0;
 }
 
