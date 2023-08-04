@@ -146,3 +146,7 @@ add_executable(testcode
 Examples/Monocular/A1_Test_01/testcode.cc)
 target_link_libraries(testcode ${PROJECT_NAME})
 
+add_executable(cc2
+Examples/Monocular/A1_Test_01/cc2.cc)
+target_link_libraries(cc2 ${PROJECT_NAME})
+

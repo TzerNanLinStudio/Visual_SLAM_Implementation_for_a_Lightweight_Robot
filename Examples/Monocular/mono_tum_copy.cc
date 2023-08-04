@@ -91,7 +91,7 @@ int main(int argc, char **argv)
 
         // Pass the image to the SLAM system
         SLAM.TrackMonocular(im,tframe);
-	cout << "tframe: " << tframe << endl;
+	//cout << "tframe: " << tframe << endl;
 
 #ifdef COMPILEDWITHC11
         std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
@@ -116,9 +116,10 @@ int main(int argc, char **argv)
 
     // Stop all threads
     SLAM.Shutdown();
-/*
+    cout << "SLAM Shutdown" << endl;
+
     // Tracking time statistics
-    sort(vTimesTrack.begin(),vTimesTrack.end());
+    /*sort(vTimesTrack.begin(),vTimesTrack.end());
     float totaltime = 0;
     for(int ni=0; ni<nImages; ni++)
     {
@@ -126,11 +127,15 @@ int main(int argc, char **argv)
     }
     cout << "-------" << endl << endl;
     cout << "median tracking time: " << vTimesTrack[nImages/2] << endl;
-    cout << "mean tracking time: " << totaltime/nImages << endl;
+    cout << "mean tracking time: " << totaltime/nImages << endl;*/
 
     // Save camera trajectory
-    SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory.txt");
-*/
+    SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory_copy.txt");
+    cout << "Save trajectory" << endl;
+
+    // Save camera trajectory
+    SLAM.SaveTrajectoryTUM("CameraTrajectory_copy.txt");
+    cout << "Save trajectory" << endl;
     return 0;
 }
 
