@@ -43,6 +43,7 @@ int main(int argc, char* argv[]) {
 
     std::cout << std::fixed << std::setprecision(6); 
 
+    int index = 0;
     while(true)
     {
 	Mat img;
@@ -61,7 +62,7 @@ int main(int argc, char* argv[]) {
 	double tframe = seconds.count();
 	
         if (f2) 
-	    std::cout << "Frame Timestamp: " << tframe << std::endl;
+	    std::cout << "Index: " << index << " ; Frame Timestamp: " << tframe << std::endl;
 
         // Check if the image was successfully read
         if(img.empty())
@@ -71,6 +72,8 @@ int main(int argc, char* argv[]) {
         }
 
 	SLAM.TrackMonocular(img,tframe);
+
+        index++;
 
         usleep(5);
 
@@ -96,6 +99,8 @@ int main(int argc, char* argv[]) {
     // Save camera trajectory
     //SLAM.SaveTrajectoryTUM("CameraTrajectory_copy.txt");
     //cout << "Save trajectory" << endl;
+
+    inputThread.join();
 
     std::cout << "====================End Program====================" << std::endl;
 

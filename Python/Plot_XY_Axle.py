@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 
 #with open("KeyFrameTrajectory_copy.txt", "r") as file:
-with open("z3.txt", "r") as file:
+with open("track_data.txt", "r") as file:
     lines = file.readlines()
 
 timestamps = [] 
