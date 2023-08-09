@@ -150,3 +150,7 @@ add_executable(Code_03
 Examples/Monocular/Test_A01/Code_03.cc)
 target_link_libraries(Code_03 ${PROJECT_NAME})
 
+add_executable(Code_04
+Examples/Monocular/Test_A01/Code_04.cc)
+target_link_libraries(Code_04 ${PROJECT_NAME})
+
