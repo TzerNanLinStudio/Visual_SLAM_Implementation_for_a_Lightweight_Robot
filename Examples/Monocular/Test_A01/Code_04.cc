@@ -15,8 +15,7 @@
 using namespace cv;
 using namespace std;
 
-std::atomic<bool> f1(true); // Keep running
-std::atomic<bool> f2(false); // Show current timestamp
+std::atomic<bool> flag(true); 
 
 void getUserInput();
 
@@ -27,38 +26,22 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // Create SLAM system. It initializes all system threads and gets ready to process frames.
     ORB_SLAM2::System SLAM(argv[1],argv[2],ORB_SLAM2::System::MONOCULAR,true);
 
-    cv::VideoCapture cap("nvarguscamerasrc sensor_mode=4 ! video/x-raw(memory:NVMM), width=1280, height=720, format=(string)NV12, framerate=(fraction)60/1 ! nvvidconv flip-method=0 ! video/x-raw, width=(int)1280, height=(int)720, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink");
+    cv::VideoCapture cap(0);
     
-
     std::thread inputThread(getUserInput);    
 
-    std::cout << std::fixed << std::setprecision(6); 
-
-    int index = 0;
     while(true)
     {
 	Mat img;
         cap >> img;
 
-	// Get the current time
 	auto now = std::chrono::system_clock::now();
-
-	// Convert it to a time_point for the Epoch (1970-01-01 00:00:00)
 	auto epoch = now.time_since_epoch();
-
-	// Convert that to seconds
         std::chrono::duration<double> seconds = std::chrono::duration_cast<std::chrono::duration<double>>(epoch);
-
-	// Convert to a double
 	double tframe = seconds.count();
 	
-        if (f2) 
-	    std::cout << "Index: " << index << " ; Frame Timestamp: " << tframe << std::endl;
-
-        // Check if the image was successfully read
         if(img.empty())
         {
             std::cerr << "ERROR: Unable to read the image\n";
@@ -67,41 +50,23 @@ int main(int argc, char* argv[]) {
 
 	SLAM.TrackMonocular(img,tframe);
 
-        index++;
-
         usleep(5);
 
-	if (!f1) 
+	if (!flag) 
 	    break; 
     }
 
     SLAM.Shutdown();
 
-    // When everything done, release the video capture object
     cap.release();
 
-
-    // Closes all the frames
     destroyAllWindows();
 
-    // Save camera trajectory
-    SLAM.SaveKeyFrameTrajectoryTUM("Examples/Monocular/Test_A01/Code_03_KeyFrameTrajectory.txt");
-    cout << "Save trajectory" << endl;
+    SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory.txt");
 
     inputThread.join();
 
     return 0;
-}
-
-
-void WaitForInput()
-{
-    while (true) {
-        std::cout << "Input: ";
-        char c; std::cin >> c;
-        if (c == 'n')
-            break;
-    }
 }
 
 void getUserInput() {
@@ -109,11 +74,8 @@ void getUserInput() {
     while (true) {
         std::cin >> c;
         if (c == 'q') {
-            f1 = !f1;
+            flag = !flag;
             break;
-        }
-	if (c == 't') {
-            f2 = !f2;
         }
     }
 }
