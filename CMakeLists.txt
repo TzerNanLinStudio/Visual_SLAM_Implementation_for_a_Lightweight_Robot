@@ -117,40 +117,10 @@ add_executable(mono_euroc
 Examples/Monocular/mono_euroc.cc)
 target_link_libraries(mono_euroc ${PROJECT_NAME})
 
-add_executable(mono_tum_copy
-Examples/Monocular/mono_tum_copy.cc)
-target_link_libraries(mono_tum_copy ${PROJECT_NAME})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Development/C++)
+add_executable(VisualSLAM
+Development/C++/VisualSLAM.cc)
+target_link_libraries(VisualSLAM ${PROJECT_NAME})
 
-add_executable(A_Test_01
-Examples/Monocular/A_Test_01.cc)
-target_link_libraries(A_Test_01 ${PROJECT_NAME})
 
-add_executable(A_Test_02
-Examples/Monocular/A_Test_02.cc)
-target_link_libraries(A_Test_02 ${PROJECT_NAME})
-
-add_executable(A_Test_03
-Examples/Monocular/A_Test_03.cc)
-target_link_libraries(A_Test_03 ${PROJECT_NAME})
-
-add_executable(A_Test_04
-Examples/Monocular/A_Test_04.cc)
-target_link_libraries(A_Test_04 ${PROJECT_NAME})
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Monocular/Test_A01)
-add_executable(Code_01
-Examples/Monocular/Test_A01/Code_01.cc)
-target_link_libraries(Code_01 ${PROJECT_NAME})
-
-add_executable(Code_02
-Examples/Monocular/Test_A01/Code_02.cc)
-target_link_libraries(Code_02 ${PROJECT_NAME})
-
-add_executable(Code_03
-Examples/Monocular/Test_A01/Code_03.cc)
-target_link_libraries(Code_03 ${PROJECT_NAME})
-
-add_executable(Code_04
-Examples/Monocular/Test_A01/Code_04.cc)
-target_link_libraries(Code_04 ${PROJECT_NAME})
 
