@@ -1,2 +1,2 @@
-![Image text](Image/1.jpg)
+![Image text](Image/1.png)
 
