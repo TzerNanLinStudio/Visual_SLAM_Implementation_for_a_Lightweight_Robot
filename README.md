@@ -2,7 +2,7 @@
 
 # 1. Introduction
 
-This project was completed during my master's degree in Advanced Computer Science at Newcastle University. The research combines embedded systems and machine vision techniques. Its primary objective is to develop a Visual SLAM system suitable for lightweight robots, showing potential for applications in specialized environments.
+This project was completed during my master's degree in Advanced Computer Science at Newcastle University. The research combines embedded systems and computer vision techniques. Its primary objective is to develop a Visual SLAM system suitable for lightweight robots, showing potential for applications in specialized environments.
 
 This repository contains all the code for this project but this Markdown document only provides a basic introduction to this project. For a deeper understanding, please contact me via email at tzernan.lin.studio@gmail.com.
 
