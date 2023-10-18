@@ -8,13 +8,13 @@ This repository contains all the code for this project but this Markdown documen
 
 # 2. The lightwieith robot structure
 
-The lightweight robot used in this study is based on the TurtleBot3 Burger with some modifications. The following picture showcase the fully assembled exterior of it. For detailed information about TurtleBot3, please refer to the following link: https://www.turtlebot.com/turtlebot3/.
+The lightweight robot used in this research is based on the TurtleBot3 Burger with some modifications. The following picture showcase the fully assembled exterior of it. For detailed information about TurtleBot3, please refer to the following link: https://www.turtlebot.com/turtlebot3/.
 
 ![Alt text](./Image/image_03.png)
 
 # 3. The visual SLAM implementation
 
-This project adopts the open-source ORB-SLAM2 as its foundation and makes appropriate modifications to fit the needs of this research. For detailed information about TurtleBot3, please refer to the following link: https://github.com/raulmur/ORB_SLAM2.
+This project adopted the open-source ORB-SLAM2 as its foundation and makes appropriate modifications to fit the needs of this research. For detailed information about TurtleBot3, please refer to the following link: https://github.com/raulmur/ORB_SLAM2.
 
 # 3. Demonstration
 
