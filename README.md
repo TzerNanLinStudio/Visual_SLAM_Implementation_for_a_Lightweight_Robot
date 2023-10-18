@@ -10,7 +10,7 @@ This repository contains all the code for this project but this Markdown documen
 
 The lightweight robot used in this research is based on the TurtleBot3 Burger with some modifications. The following picture showcase the fully assembled exterior of it. For detailed information about TurtleBot3, please refer to the following link: https://www.turtlebot.com/turtlebot3/.
 
-![Alt text](./Image/image_03.png)
+![Image Error](./Image/image_03.png)
 
 # 3. The visual SLAM implementation
 
@@ -20,9 +20,9 @@ This project adopted the open-source ORB-SLAM2 as its foundation and makes appro
 
 After development, I utilized ROS to remotely initiate the Visual SLAM program and operate the robot to move indoors, successfully establishing 3D point cloud maps. The screenshots from the experiment are shown in the following pictures. Among them, green square frames represent feature points; blue rectangular frames depict the camera trajectory; black dots indicate map points; and red dots represent temporary map points.
 
-![example2](./Image/image_01.png)
-![example2](./Image/image_02.png)
+![Image Error](./Image/image_01.png)
+![Image Error](./Image/image_02.png)
 
 The following picture displays the on-site experiment situation:
 
-![Alt text](./Image/image_04.jpg)
+![Image Error](./Image/image_04.jpg)
