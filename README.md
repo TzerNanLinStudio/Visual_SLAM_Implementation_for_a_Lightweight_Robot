@@ -14,7 +14,7 @@ The lightweight robot used in this research is based on the TurtleBot3 Burger wi
 
 # 3. The visual SLAM implementation
 
-This project adopted the open-source ORB-SLAM2 as its foundation and makes appropriate modifications to fit the needs of this research. For detailed information about TurtleBot3, please refer to the following link: https://github.com/raulmur/ORB_SLAM2.
+This project adopted the open-source ORB-SLAM2 as its foundation and makes appropriate modifications to fit the needs of this research. For detailed information about ORB-SLAM2, please refer to the following link: https://github.com/raulmur/ORB_SLAM2.
 
 # 4. Demonstration
 
